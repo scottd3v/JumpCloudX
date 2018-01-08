@@ -1,7 +1,7 @@
 
 # API Call - GET Example
 
-$APIkey = "Repalce with API KEY"
+$APIkey = "Replace with API KEY"
 
 $Url = "Replace with URL"
 
