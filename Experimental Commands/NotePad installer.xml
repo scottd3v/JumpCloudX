@@ -1,0 +1,33 @@
+<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+  <Obj RefId="0">
+    <TN RefId="0">
+      <T>System.Management.Automation.PSCustomObject</T>
+      <T>System.Object</T>
+    </TN>
+    <MS>
+      <S N="_id">5a3bdbf6426de784538d0986</S>
+      <S N="name">Windows - Install Notepad ++</S>
+      <S N="trigger"></S>
+      <S N="command">## NotePad++ installer_x000A_$DownloadURL = 'https://notepad-plus-plus.org/repository/7.x/7.5.1/npp.7.5.1.Installer.x64.exe'_x000A_$FileName = 'npp.7.5.1.Installer.x64.exe' #Enter name of the file_x000A_$DownloadPath = "C:\Windows\Temp\$FileName"_x000A__x000A_(New-Object System.Net.WebClient).DownloadFile($DownloadURL,$DownloadPath) #Downloads the file_x000A__x000A_Start-Process  -FilePath "C:\Windows\temp\npp.7.5.1.Installer.x64.exe" -ArgumentList  "/S"_x000A_</S>
+      <S N="commandType">windows</S>
+      <Obj N="commandRunners" RefId="1">
+        <TN RefId="1">
+          <T>System.Object[]</T>
+          <T>System.Array</T>
+          <T>System.Object</T>
+        </TN>
+        <LST />
+      </Obj>
+      <Nil N="user" />
+      <B N="sudo">false</B>
+      <S N="launchType">manual</S>
+      <S N="listensTo"></S>
+      <S N="scheduleRepeatType">day</S>
+      <S N="schedule">immediate</S>
+      <Ref N="files" RefId="1" />
+      <S N="timeout">120</S>
+      <S N="organization">59df9ce8c00b4cf463187062</S>
+      <S N="shell">powershell</S>
+    </MS>
+  </Obj>
+</Objs>
