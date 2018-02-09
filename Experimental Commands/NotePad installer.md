@@ -1,3 +1,9 @@
+##### Name
+Windows - Install Notepad +++
+
+##### commandType
+windows
+
 ##### Command
 
 ```
@@ -11,8 +17,3 @@ $DownloadPath = "C:\Windows\Temp\$FileName"
 Start-Process  -FilePath "C:\Windows\temp\npp.7.5.1.Installer.x64.exe" -ArgumentList  "/S"
 ```
 
-##### Name
-Windows - Install Notepad ++
-
-##### commandType
-windows
