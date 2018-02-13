@@ -14,6 +14,7 @@ apt update
 
 #### Description
 
+Updates a linux machine
 
 #### *Import This Command*
 

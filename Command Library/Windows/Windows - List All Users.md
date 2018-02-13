@@ -16,6 +16,7 @@ Write-Output $UserAccounts
 
 #### Description
 
+Lists all users from a Windows system
 
 #### *Import This Command*
 

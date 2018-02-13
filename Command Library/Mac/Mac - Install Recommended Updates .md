@@ -14,6 +14,7 @@ sudo softwareupdate -i -r
 
 #### Description
 
+Sends an update request to a Mac to install reccomended updates
 
 #### *Import This Command*
 

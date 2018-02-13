@@ -14,6 +14,7 @@ cat /var/log/jcagent.log
 
 #### Description
 
+Pulls the JC agent log from a Mac system
 
 #### *Import This Command*
 

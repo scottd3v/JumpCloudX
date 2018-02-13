@@ -14,7 +14,7 @@ Get-content -Path 'C:\Windows\Temp\jcagent.log'
 
 #### Description
 
-
+Returns the JC agent log from a Windows system
 #### *Import This Command*
 
 To import this command into your JumpCloud tenant run the below command using the [JumpCloud PowerShell Module](https://github.com/TheJumpCloud/support/wiki/Installing-the-JumpCloud-PowerShell-Module)
