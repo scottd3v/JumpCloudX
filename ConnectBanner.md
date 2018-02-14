@@ -1,7 +1,7 @@
 #### Current Version
 
 ```
-Current version: 1.1.0
+1.1.0
 ```
 
 #### Banner Current
