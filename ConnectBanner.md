@@ -7,7 +7,7 @@
 #### Banner Current
 
 ```
-Module up-to-date! Sup $env:USER 
+Module up-to-date!
 ```
 
 #### Banner Old
