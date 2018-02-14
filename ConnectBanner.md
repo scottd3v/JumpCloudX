@@ -2,7 +2,7 @@
 
 ```
 
-Current version: 1.1
+Current version: 1.1.0
 
 ```
 
