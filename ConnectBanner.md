@@ -7,7 +7,7 @@
 #### Banner Current
 
 ```
-Module up-to-date! Happy $((Get-Date).DayOfWeek)
+Module up-to-date! Sup $env:USER 
 ```
 
 #### Banner Old
