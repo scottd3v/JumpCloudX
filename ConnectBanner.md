@@ -7,7 +7,7 @@
 #### Banner Current
 
 ```
-Module up-to-date! Brad
+Module up-to-date!
 ```
 
 #### Banner Old
