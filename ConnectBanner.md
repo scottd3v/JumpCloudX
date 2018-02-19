@@ -13,5 +13,5 @@ Module up-to-date!
 #### Banner Old
 
 ```
-New version avaliable!
+New JumpCloud module avaliable!
 ```
