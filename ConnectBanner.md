@@ -1,17 +1,17 @@
 #### Latest Version
 
 ```
-1.0.0
+1.1.0
 ```
 
 #### Banner Current
 
 ```
-Happy Friday. Module up-to-date!
+Module up-to-date!
 ```
 
 #### Banner Old
 
 ```
-New JumpCloud module avaliable!
+SURPRISE! New JumpCloud module avaliable!
 ```
