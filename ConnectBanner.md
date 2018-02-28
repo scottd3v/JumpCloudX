@@ -13,5 +13,5 @@ Module up-to-date!
 #### Banner Old
 
 ```
-SURPRISE! New JumpCloud module avaliable!
+SURPRISE Jordan! New JumpCloud module avaliable!
 ```
