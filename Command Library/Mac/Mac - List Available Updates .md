@@ -1,6 +1,6 @@
 #### Name
 
-Mac - List Available Updates 
+Mac - List Available Updates | v1.0 JCCG
 
 #### commandType
 

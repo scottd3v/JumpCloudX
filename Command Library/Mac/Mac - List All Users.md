@@ -1,6 +1,6 @@
 #### Name
 
-Mac - List All Users
+Mac - List All Users | v1.0 JCCG
 
 #### commandType
 
