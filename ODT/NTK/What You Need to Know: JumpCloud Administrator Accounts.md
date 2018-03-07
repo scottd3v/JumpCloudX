@@ -21,4 +21,4 @@ Because JumpCloud Administrator Accounts are different from JumpCloud User Accou
 
 |Percent Complete|0%|
 |-------------| -------------  |
-|[Previous Page]()|[Next Page]()|
+|[Previous Page](https://github.com/scottd3v/JumpCloudX/blob/master/ODT/Welcome.md)|[Next Page](https://github.com/scottd3v/JumpCloudX/blob/master/ODT/NTK/What%20You%20Need%20to%20Know:%20JumpCloud%20User%20Accounts.md)|
