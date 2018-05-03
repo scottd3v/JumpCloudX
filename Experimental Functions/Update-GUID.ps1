@@ -10,8 +10,6 @@ function Update-GUID
         [Parameter(Mandatory,
             ValueFromPipelineByPropertyName)]
         [String]$SystemID
-
-        ## Parameter set userid
         
     )
 
