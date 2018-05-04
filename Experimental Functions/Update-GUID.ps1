@@ -1,4 +1,4 @@
-function Update-GUID_beta
+function Update-GUID
 {
     [CmdletBinding()]
     param (
