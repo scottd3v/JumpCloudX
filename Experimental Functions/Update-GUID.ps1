@@ -10,8 +10,6 @@ function Update-GUID
         [Parameter(Mandatory,
             ValueFromPipelineByPropertyName)]
         [String]$SystemID
-
-        ## Parameter set userid
         
     )
 
@@ -259,6 +257,6 @@ sudo dscl . -create /Users/$username PrimaryGroupID $($JCUser.unix_guid)
 
 }
 
-
+Update-GUID -Username bro.hondo -SystemID 5ae389c8ceb2512152ae5098
 
 
