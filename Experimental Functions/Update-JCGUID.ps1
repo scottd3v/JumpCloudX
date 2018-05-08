@@ -1,4 +1,4 @@
-function Update-GUID
+function Update-JCGUID
 {
     [CmdletBinding()]
     param (
@@ -152,10 +152,10 @@ sudo dscl . -create /Users/$username PrimaryGroupID $($JCUser.unix_guid)
 
                 # Paramters to create command to restart agent
 
-                $AgentRestartParams = @{
+                $SystemRestartParams = @{
                     commandType = 'mac'
-                    name        = "Temp_AgentRestart System: $SystemID $(Get-Date -Format HH:mm_ss)"
-                    command     = 'cd /opt/jc; stop=`launchctl stop com.jumpcloud.darwin-agent`'
+                    name        = "Temp_System Restart System: $SystemID $(Get-Date -Format HH:mm_ss)"
+                    command     = 'sudo shutdown -r now'
                     launchType  = 'trigger'
                     trigger     = "$($SystemID)$(Get-Date -Format MMddyyTHHmmss)"
                     timeout     = 120
@@ -163,41 +163,40 @@ sudo dscl . -create /Users/$username PrimaryGroupID $($JCUser.unix_guid)
 
                 # Creates temp command to restart agent
                     
-                $AgentRestart_TempCommand = New-JCCommand @AgentRestartParams
+                $SystemRestart_TempCommand = New-JCCommand @SystemRestartParams
 
                 # Adds System vis $SystemID to the new temp command
                     
-                Add-JCCommandTarget -CommandID $AgentRestart_TempCommand._id  -SystemID $SystemID
+                Add-JCCommandTarget -CommandID $SystemRestart_TempCommand._id  -SystemID $SystemID
 
                 # Runs the command using the unique trigger
         
-                Invoke-JCCommand -trigger $AgentRestart_TempCommand.trigger
+                Invoke-JCCommand -trigger $SystemRestart_TempCommand.trigger
 
                 # Waits for 60 seconds for command to run
 
-                Start-Sleep -Seconds 60
+                Start-Sleep -Seconds 100
 
                 # Looks for command output
 
-                $AgentRestartResults = Get-JCCommandResult | Where-Object Name -EQ $AgentRestart_TempCommand.name
+                $SystemRestartResults = Get-JCCommandResult | Where-Object Name -EQ $SystemRestart_TempCommand.name
 
-                while (-not $AgentRestartResults)
+                while (-not $SystemRestartResults)
 
                 {
-                    Write-Host "Agent Restart Output not found trying again"
-                    Invoke-JCCommand -trigger $AgentRestart_TempCommand.trigger
-                    Start-Sleep -Seconds 60
-                    $AgentRestartResults = Get-JCCommandResult | Where-Object Name -EQ $AgentRestart_TempCommand.name
+                    Write-Host "System Restart Output not found trying again"
+                    Start-Sleep -Seconds 30
+                    $SystemRestartResults = Get-JCCommandResult | Where-Object Name -EQ $SystemRestart_TempCommand.name
     
                 }
 
                 # Removes temp command
                 
-                Remove-JCCommand -CommandID $AgentRestart_TempCommand._id -force
+                Remove-JCCommand -CommandID $SystemRestart_TempCommand._id -force
 
                 # Removes temp command result (Does not provide an exit code)
 
-                $RemoveAgentRestart = $AgentRestartResults | Remove-JCCommandResult  -force
+                $RemoveSystemRestart = $SystemRestartResults | Remove-JCCommandResult  -force
 
                 # Formats successful object
 
@@ -205,7 +204,7 @@ sudo dscl . -create /Users/$username PrimaryGroupID $($JCUser.unix_guid)
 
                     'Username'     = $username
                     'SystemID'     = $SystemID
-                    'SystemStatus' = 'AgentRestarted'
+                    'SystemStatus' = 'Restarted'
                     'GUIDUpdate'   = 'Successful'
                 }
         
@@ -257,6 +256,5 @@ sudo dscl . -create /Users/$username PrimaryGroupID $($JCUser.unix_guid)
 
 }
 
-Update-GUID -Username bro.hondo -SystemID 5ae389c8ceb2512152ae5098
 
 
