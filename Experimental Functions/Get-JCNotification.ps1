@@ -1,8 +1,14 @@
-
 function Get-JCNotification
 {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'All')]
+
     param (
+
+        [Parameter(
+            ParameterSetName = 'GUIDConflict')]        
+        [Switch]
+        $GUIDConflict
+
         
     )
     
@@ -20,52 +26,113 @@ function Get-JCNotification
 
         }
 
-
         Write-Verbose 'Initilizing resultsArray'
         $resultsArray = @()
+
+        Write-Verbose "Paramter Set: $($PSCmdlet.ParameterSetName)"
     }
     
     process
-    {
-
+    {   
+        
         $Url = 'https://console.jumpcloud.com/api/notifications/grouped'
 
         $Results = Invoke-RestMethod -Method Get -Uri $Url -Headers $hdrs
-
-        foreach ($R in $Results)
+        
+        switch ($PSCmdlet.ParameterSetName)
         {
+            All
+            {  
+               
+                foreach ($R in $Results)
+                {
+        
+                    $Username = $R.systemuser.name
+                    $UserID = $R.systemuser.id
+        
+                    Foreach ($C in $R.conflicts)
+                    {
+        
+                        $Conflict = $C.type
+                        $ConflictMessage = $C.message
 
-            $Username = $R.systemuser.name
-            $UserID = $R.systemuser.id
-            $Conflict = $R.conflicts.type
+                        foreach ($S in $C.systems)
+                        {
 
-            Foreach ($C in $R.conflicts.systems)
-            {
+                            $SystemID = $S._id
+                            $DisplayName = $S.DisplayName
 
-                $DisplayName = $C.DisplayName
-                $SystemID = $C.id
-
-                $FormattedResults = [PSCustomObject]@{
+                            $FormattedResults = [PSCustomObject]@{
+                        
+                                'ConflictType'    = $Conflict
+                                'ConflictMessage' = $ConflictMessage
+                                'Username'        = $Username
+                                'UserID'          = $UserID
+                                'DisplayName'     = $DisplayName
+                                'SystemID'        = $SystemID
                 
-                    'ConflictType' = $Conflict
-                    'Username'     = $Username
-                    'UserID'       = $UserID
-                    'DisplayName'  = $DisplayName
-                    'SystemID'     = $SystemID
-    
-    
+                
+                            }
+            
+                            $resultsArray += $FormattedResults
+
+                        }                        
+        
+                    }
+                    
                 }
 
-                $resultsArray += $FormattedResults
 
             }
-            
-        }
+            GUIDConflict
+            {
 
+                foreach ($R in $Results)
+                {
+        
+                    $Username = $R.systemuser.name
+                    $UserID = $R.systemuser.id
+        
+                    Foreach ($C in $R.conflicts)
+                    {
+        
+                        $Conflict = $C.type
+                        $ConflictMessage = $C.message
+
+                        if ($Conflict -eq "GID-CONFLICT")
+                        {
+                        
+                            foreach ($S in $C.systems)
+                            {
+
+                                $SystemID = $S._id
+                                $DisplayName = $S.DisplayName
+    
+                                $FormattedResults = [PSCustomObject]@{
+                            
+                                    'ConflictType'    = $Conflict
+                                    'ConflictMessage' = $ConflictMessage
+                                    'Username'        = $Username
+                                    'UserID'          = $UserID
+                                    'DisplayName'     = $DisplayName
+                                    'SystemID'        = $SystemID
+                    
+                    
+                                }
+                
+                                $resultsArray += $FormattedResults
+    
+                            }
+                        }                            
+                    }              
+                }
+            }
+        }
     }
     
     end
     {
         Return $resultsArray
     }
+   
 }
