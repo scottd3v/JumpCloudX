@@ -150,7 +150,7 @@ sudo dscl . -create /Users/$username PrimaryGroupID $($JCUser.unix_guid)
                 Add-JCSystemUser -Username $SystemUser.Username -SystemID $SystemUser.SystemID -Administrator $SystemUser.Administrator
 
 
-                # Paramters to create command to restart agent
+                # Paramters to create command to restart system
 
                 $SystemRestartParams = @{
                     commandType = 'mac'
@@ -161,7 +161,7 @@ sudo dscl . -create /Users/$username PrimaryGroupID $($JCUser.unix_guid)
                     timeout     = 120
                 }
 
-                # Creates temp command to restart agent
+                # Creates temp command to restart system
                     
                 $SystemRestart_TempCommand = New-JCCommand @SystemRestartParams
 
