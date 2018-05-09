@@ -1,4 +1,4 @@
-function Update-JCGUID
+function Update-JCGID
 {
     [CmdletBinding()]
     param (
