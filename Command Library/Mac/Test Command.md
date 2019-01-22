@@ -102,7 +102,7 @@ if [[ $userBindCheck =~ $regex ]]; then
 			-H 'Accept: application/json' \
 			-H 'x-api-key: '${JCAPIKey}'' \
 			-d '{"op": "remove","type": "system","id": "'${systemID}'"}' \
-			"$JCUrlBasePath/api/v2/systemgroups/${systemGroupID}/members"
+			"https://console.jumpcloud.com/api/v2/systemgroups/${systemGroupID}/members"
 	)
 
 	echo "Removed ${systemID} from system group ${systemGroupID}"
@@ -201,7 +201,7 @@ if [[ $activated == "true" ]]; then
 				-H 'Accept: application/json' \
 				-H 'x-api-key: '${JCAPIKey}'' \
 				-d '{"op": "remove","type": "system","id": "'${systemID}'"}' \
-				"$JCUrlBasePath/api/v2/systemgroups/${systemGroupID}/members"
+				"https://console.jumpcloud.com/api/v2/systemgroups/${systemGroupID}/members"
 		)
 
 		echo "Removed ${systemID} from system group ${systemGroupID}"
