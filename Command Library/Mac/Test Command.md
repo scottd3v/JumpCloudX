@@ -102,9 +102,9 @@ fi
 # Prompt user for logout
 
 if [[ $activated == "true" ]]; then
-	userPrompt=$(sudo -u $username osascript -e 'display dialog "JumpCloud account takeover for account: '$username'\n\nAfter clicking Ok the JumpCloud agent will update the system password for account: '$username' to the current JumpCloud password.\n\nAfter the password update you will be logged out and taken to login window to complete the account takeover.\n\nAt the login window enter your current computer password in the PREVIOUS PASSWORD box.\n\n In the PASSWORD box below this enter your JumpCloud password." buttons {"Ok"}default button "Ok" giving up after 60' 2>/dev/null)
+	userPrompt=$(sudo -u $username osascript -e 'display dialog "JumpCloud account takeover for account: '$username'\n\nAfter clicking Ok the JumpCloud agent will update the system password for account: '$username' to the current JumpCloud password.\n\nAfter the password update you will be logged out and taken to login window to complete the account takeover.\n\nAt the login window enter your current computer password in the PREVIOUS PASSWORD box.\n\n In the PASSWORD box below this enter your JumpCloud password." buttons {"Ok"}default button "Ok" giving up after 120' 2>/dev/null)
 
-	if [ "$userPrompt" = "button returned:Ok" ]; then
+	if [ "$userPrompt" = "returned:Ok, gave up:false" ]; then
 		echo "User said Ok to prompt"
 
 		## Capture current logFile
