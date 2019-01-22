@@ -1,6 +1,6 @@
 #### Name
 
-Mac - Popup|end user choice|bind logged in user with JC user|set existing system permissions| JCX 1.0
+Mac - Bind logged in user to system | Prompt = choice, Permissions = existing, Force logout = true | JCX 1.0
 
 #### commandType
 
