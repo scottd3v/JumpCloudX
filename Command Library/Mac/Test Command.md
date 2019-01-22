@@ -1,6 +1,6 @@
 #### Name
 
-Mac - Bind logged in user to system | Prompt = choice, Permissions = existing, Force logout = true | JCX 1.0
+Mac - Bind logged in user to system | Prompt = choice, Permissions = existing, Force Logout = true | JCX 1.0
 
 #### commandType
 
