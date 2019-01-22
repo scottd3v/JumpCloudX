@@ -1,6 +1,6 @@
 #### Name
 
-Mac - Bind logged in user to system | Prompt = choice, Permissions = existing, Force Logout = true, Association Removal = command | v1.0 JCCG
+Mac - Bind logged in user to system | Prompt = choice, Permissions = existing, Force Logout = true, Association Removal = systemGroup | v1.0 JCCG
 
 #### commandType
 
@@ -9,9 +9,9 @@ mac
 #### Command
 
 ```
-## Populate below variable before running command
+## Populate below variables before running command
 JCAPIKey=''
-commandID=''
+systemGroupID=''
 
 ## ------ MODIFY BELOW THIS LINE AT YOUR OWN RISK --------------
 ## Get the logged in user's username
@@ -102,14 +102,14 @@ if [[ $userBindCheck =~ $regex ]]; then
 			-H 'Accept: application/json' \
 			-H 'x-api-key: '${JCAPIKey}'' \
 			-d '{"op": "remove","type": "system","id": "'${systemID}'"}' \
-			"https://console.jumpcloud.com/api/v2/commands/${commandID}/associations"
-
+			"$JCUrlBasePath/api/v2/systemgroups/${systemGroupID}/members"
 	)
 
-	echo "Removed system ${systemID} from command ${commandID}"
+	echo "Removed ${systemID} from system group ${systemGroupID}"
 	exit 0
 
 else
+
 	echo "JumpCloud user not bound to system."
 fi
 
@@ -201,11 +201,10 @@ if [[ $activated == "true" ]]; then
 				-H 'Accept: application/json' \
 				-H 'x-api-key: '${JCAPIKey}'' \
 				-d '{"op": "remove","type": "system","id": "'${systemID}'"}' \
-				"https://console.jumpcloud.com/api/v2/commands/${commandID}/associations"
-
+				"$JCUrlBasePath/api/v2/systemgroups/${systemGroupID}/members"
 		)
 
-		echo "Removed system ${systemID} from command ${commandID}"
+		echo "Removed ${systemID} from system group ${systemGroupID}"
 		exit 0
 
 	else
