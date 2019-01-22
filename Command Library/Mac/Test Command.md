@@ -70,7 +70,7 @@ fi
 regex='"activated":true'
 if [[ $userSearch =~ $regex ]]; then
 	activated="true"
-	echo "JumpCloud Password set for $username"
+	echo "JumpCloud account in active state for user: $username"
 
 else
 	activated="false"
@@ -192,7 +192,6 @@ else
 
 	exit 1
 fi
-
 ```
 
 #### Description
