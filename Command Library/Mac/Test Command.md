@@ -1,7 +1,6 @@
 #### Name
 
-Mac - Bind logged in user to system | Prompt = force, Permissions = existing, Force Logout = true | v1.0 JCCG
-
+Mac - Bind logged in user to system | Prompt = force, Permissions = existing, Force Logout = true, Association Removal = systemGroup | v1.0 JCCG
 #### commandType
 
 mac
@@ -9,8 +8,9 @@ mac
 #### Command
 
 ```
-## Populate below variable before running command
+## Populate below variables before running command
 JCAPIKey=''
+systemGroupID=''
 
 ## ------ MODIFY BELOW THIS LINE AT YOUR OWN RISK --------------
 ## Get the logged in user's username
@@ -93,9 +93,22 @@ regex=''${userID}''
 if [[ $userBindCheck =~ $regex ]]; then
 	userID="${BASH_REMATCH[@]}"
 	echo "JumpCloud user $username already bound to systemID: $systemID"
+
+	associationRemove=$(
+		curl -s \
+			-X 'POST' \
+			-H 'Content-Type: application/json' \
+			-H 'Accept: application/json' \
+			-H 'x-api-key: '${JCAPIKey}'' \
+			-d '{"op": "remove","type": "system","id": "'${systemID}'"}' \
+			"https://console.jumpcloud.com/api/v2/systemgroups/${systemGroupID}/members"
+	)
+
+	echo "Removed ${systemID} from system group ${systemGroupID}"
 	exit 0
 
 else
+
 	echo "JumpCloud user not bound to system."
 fi
 
@@ -104,7 +117,7 @@ fi
 if [[ $activated == "true" ]]; then
 	userPrompt=$(sudo -u $username osascript -e 'display dialog "JumpCloud account takeover for account: '$username'\n\nAfter clicking Ok the JumpCloud agent will update the system password for account: '$username' to the current JumpCloud password.\n\nAfter the password update you will be logged out and taken to login window to complete the account takeover.\n\nAt the login window enter your current computer password in the PREVIOUS PASSWORD box.\n\n In the PASSWORD box below this enter your JumpCloud password." buttons {"Ok"}default button "Ok" giving up after 120' 2>/dev/null)
 
-	if [ "$userPrompt" = "returned:Ok, gave up:false" ]; then
+	if [ "$userPrompt" = "button returned:Ok, gave up:false" ]; then
 		echo "User said Ok to prompt"
 
 		## Capture current logFile
@@ -179,6 +192,18 @@ if [[ $activated == "true" ]]; then
 			fi
 		done
 		echo "${username} logged out"
+
+		associationRemove=$(
+			curl -s \
+				-X 'POST' \
+				-H 'Content-Type: application/json' \
+				-H 'Accept: application/json' \
+				-H 'x-api-key: '${JCAPIKey}'' \
+				-d '{"op": "remove","type": "system","id": "'${systemID}'"}' \
+				"https://console.jumpcloud.com/api/v2/systemgroups/${systemGroupID}/members"
+		)
+
+		echo "Removed ${systemID} from system group ${systemGroupID}"
 		exit 0
 
 	else
